@@ -43,13 +43,6 @@ class admin:
             self.listbox = Listbox(self.frame)
             self.listbox.place(x=100,y=200,width=500,height=100)
 
-       #    sb1=Scrollbar(window)
-        #    sb1.grid(row=3,column=2,rowspan=6)
-
-        #    list1.configure(yscrollcommand=sb1.set)
-        #    sb1.configure(command=list1.yview)
-        #    self.listbox.bind("<<ListboxSelect>>",get_selected_row())
-
             self.button_view = Button(self.frame,text='View All', command=self.view_command)
             self.button_view.place(x=100,y=320,width=100,height=40)
 
@@ -68,8 +61,6 @@ class admin:
             self.button_issue = Button(self.frame, text='Clear Fields', command=self.clear_command)
             self.button_issue.place(x=100, y=360,width=100,height=40)
 
-
-
             self.button_request = Button(self.frame, text='Requested Books', command=self.requestsearch_command)
             self.button_request.place(x=300, y=360,width=100,height=40)
 
@@ -81,9 +72,6 @@ class admin:
             self.button_issuedelete.destroy()
             self.button_requestdelete.destroy()
 
-
-            #b6=Button(window,text="CLOSE WINDOW",width=14,command=window.destroy)
-            #b6.grid(row=8,column=3)
         def clear_command(self):
             self.entry_title.delete(0,END)
             self.entry_year.delete(0,END)
@@ -103,7 +91,6 @@ class admin:
             self.entry_isbn.delete(0,END)
             #self.entry_isbn.insert(END,value[4])
 
-
         def issuesearch_command(self):
             self.listbox.delete(0,END) # it will empty the list every time it is called
             for row in backend.issue_view(self.title_text.get(),self.author_text.get(),self.year_text.get(),self.isbn_text.get()):
@@ -113,13 +100,12 @@ class admin:
             self.button_issuedelete.place(x=400, y=360,width=100,height=40)
 
         def requestsearch_command(self):
-            self.listbox.delete(0,END) # it will empty the list every time it is called
+            self.listbox.delete(0,END)
             for row in backend.request_view(self.title_text.get(),self.author_text.get(),self.year_text.get(),self.isbn_text.get()):
                 self.listbox.insert(END,row)
 
             self.button_requestdelete = Button(self.frame, text='Request Listened', command=self.requestcomplete_command)
             self.button_requestdelete.place(x=200, y=360,width=100,height=40)
-
 
         def requestcomplete_command(self):
             selected_tuple=self.listbox.curselection()
@@ -134,31 +120,28 @@ class admin:
             self.entry_isbn.delete(0,END)
             #self.entry_isbn.insert(END,value[3])
 
-
         def view_command(self):
-            self.listbox.delete(0,END) # it will empty the list every time it is called
+            self.listbox.delete(0,END)
             for row in backend.view():
                 self.listbox.insert(END,row) # END ensures that every new entry is stored at end of the all rows
             self.destroy()
 
-
         def search_command(self):
-            self.listbox.delete(0,END) # gives an empty list
+            self.listbox.delete(0,END)
             for row in backend.search(self.title_text.get(),self.author_text.get(),self.year_text.get(),self.isbn_text.get()):
                 self.listbox.insert(END,row)
                 self.destroy()
-
 
         def add_command(self):
             backend.insert(self.title_text.get(),self.author_text.get(),self.year_text.get(),self.isbn_text.get())
             self.listbox.delete(0,END)
             self.listbox.insert(END,(self.title_text.get(),self.author_text.get(),self.year_text.get(),self.isbn_text.get()))
-
+            self.destroy()
 
         def delete_command(self):
             selected_tuple=self.listbox.curselection()
             value = self.listbox.get(selected_tuple)
-            backend.delete(value[0])
+            backend.delete(value[0])# i have to use value[0] here or at backend use id[0]
             self.entry_title.delete(0,END)
             self.entry_title.insert(END,value[1])
             self.entry_year.delete(0,END)
@@ -167,11 +150,7 @@ class admin:
             self.entry_author.insert(END,value[2])
             self.entry_isbn.delete(0,END)
             self.entry_isbn.insert(END,value[4])
-
-
-
-
-            # whether i havae to use [0] here or at backend
+            self.destroy()
 
         def update_command(self):
             selected_tuple=self.listbox.curselection()
@@ -185,12 +164,10 @@ class admin:
             self.entry_isbn.delete(0,END)
             self.entry_isbn.insert(END,value[3])
             backend.update(value[0],self.title_text.get(),self.author_text.get(),self.year_text.get(),self.isbn_text.get())
-
-
-
+            self.delete()
 
 window = Tk()
-window.title('Admin User')
+window.title('Admin_User')
 window.geometry('700x450')
 obj = admin(window)
 window.mainloop()
