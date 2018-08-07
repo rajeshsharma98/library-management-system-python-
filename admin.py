@@ -164,10 +164,10 @@ class admin:
             self.entry_isbn.delete(0,END)
             self.entry_isbn.insert(END,value[3])
             backend.update(value[0],self.title_text.get(),self.author_text.get(),self.year_text.get(),self.isbn_text.get())
-            self.delete()
 
+'''
 window = Tk()
 window.title('Admin_User')
 window.geometry('700x450')
 obj = admin(window)
-window.mainloop()
+window.mainloop()'''
