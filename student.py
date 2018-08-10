@@ -123,9 +123,9 @@ class student:
             self.entry_isbn.adelete(0,END)
             self.entry_isbn.insert(END,value[3])
             backend.update(value[0],self.title_text.get(),self.author_text.get(),self.year_text.get(),self.isbn_text.get())
-
+'''
 window = Tk()
 window.title('Student_User')
 window.geometry('700x400')
 obj = student(window)
-window.mainloop()
+window.mainloop()'''
