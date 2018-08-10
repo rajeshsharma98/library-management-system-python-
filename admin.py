@@ -141,7 +141,7 @@ class admin:
         def delete_command(self):
             selected_tuple=self.listbox.curselection()
             value = self.listbox.get(selected_tuple)
-            backend.delete(value[0])# i have to use value[0] here or at backend use id[0]
+            backend.delete(value[0])    # i have to use value[0] here or at backend use id[0]
             self.entry_title.delete(0,END)
             self.entry_title.insert(END,value[1])
             self.entry_year.delete(0,END)
