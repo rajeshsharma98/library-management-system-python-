@@ -2,9 +2,7 @@ from tkinter import *
 from PIL import Image, ImageTk
 from tkinter import messagebox, ttk
 import login_backend
-
 #creating login page along with the register page.
-
 class login:
      def __init__(self,window):
 
@@ -36,8 +34,7 @@ class login:
             self.buttonAdmin = Button(self.frame,text='Admin',bg='Orange',fg='gray12',font=('Georgia',18,'bold'),cursor='hand2', command=self.adminbutton)
 
         self.buttonStudent = Button(self.frame,text='Student',bg='Orange',fg='gray12',font=('Georgia',18,'bold'),cursor='hand2', command=self.studentbutton)
-
-		# placing
+	# placing
 
         self.label.place(x=40,y=40,width=200,height=80)
 
@@ -97,7 +94,6 @@ class login:
 
 
          # placing
-
          self.labelr.place(x=40,y=10,width=200,height=80)
 
          self.namer.place(x=80,y=100,width=240,height=60)
@@ -144,15 +140,11 @@ class login:
         self.name.place(x=100,y=140,width=240,height=60)
 
      def adminbutton(self):
-        #z =button2.winfo_exists()
-        #if z==1:
-        #messagebox.showinfo('<title>','<show>')
         self.name = Label(self.frame,text='Enter User_Name: ',bg='Orange',font=('Arial',18,'bold'))
         self.name.place(x=100,y=140,width=240,height=60)
 
 
      def studentbutton(self):
-        #self.name.destroy()
         self.flag =1
         self.buttonlogin.destroy()
         self.buttonlogin = Button(self.frame,text='LOG IN',bg='gray',fg='gray12',font=('Georgia',18,'bold'),cursor='hand2', command=self.login_student)
@@ -200,9 +192,7 @@ class login:
 window = Tk()
 window.title('Login')
 window.geometry('700x400')
-
 # creating object to login class
 obj = login(window)
 obj.loginfn()
-
 window.mainloop()
